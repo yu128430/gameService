@@ -1,0 +1,43 @@
+name: GAME_SERVER-AVALON
+on:
+ push:
+  branches:
+   - main
+
+#具體要執行步驟
+jobs:
+  job1:
+   #什麼OS下運行
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        java-version: '8'  # 可以改版本
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn  package
+      
+    - name: Deploy to Server 1
+      uses: easingthemes/ssh-deploy@main
+      env:
+       SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
+       REMOTE_HOST: ${ { secrets.HOST_DNS }}
+       REMOTE_USER: ${ { secrets.USERNAME }}
+       TARGET: ${ { secrets.TARGET_DIR }}  
+ 
+    - name: Executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ~/YOUR/TARGET/DIR
+            yarn/npm install
+            yarn/npm build
+            yarn/npm i serve
+            serve -p 3000 build/     
+    
