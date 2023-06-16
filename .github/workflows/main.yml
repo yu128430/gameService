@@ -23,7 +23,8 @@ jobs:
       run: |
           mkdir -p $GITHUB_WORKSPACE/workspace
           mv target/gameService-0.0.1-SNAPSHOT.jar $GITHUB_WORKSPACE/workspace/gameService-0.0.1-SNAPSHOT.jar
-          mv Dockerfile $GITHUB_WORKSPACE/workspace/Dockerfile  
+          mv Dockerfile $GITHUB_WORKSPACE/workspace/Dockerfile
+          rm -rf src target pom.xml
       
     - name: Deploy to Server 1
       uses: easingthemes/ssh-deploy@main
