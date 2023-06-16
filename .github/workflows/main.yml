@@ -25,8 +25,12 @@ jobs:
        SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
        REMOTE_HOST: ${{ secrets.HOST }}
        REMOTE_USER: ${{ secrets.USERNAME }}
-       TARGET: ${{ secrets.TARGET_DIR }}  
- 
+      with:
+       local-path: |
+            target/app.jar
+            target/dockerFile  # 假设 dockerFile 与 app.jar 在相同目录下
+       remote-path: /webapp/
+
     - name: Executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
       with:
