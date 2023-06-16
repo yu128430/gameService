@@ -22,10 +22,10 @@ jobs:
     - name: Deploy to Server 1
       uses: easingthemes/ssh-deploy@main
       env:
-       SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-       REMOTE_HOST: ${ { secrets.HOST_DNS }}
-       REMOTE_USER: ${ { secrets.USERNAME }}
-       TARGET: ${ { secrets.TARGET_DIR }}  
+       SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+       REMOTE_HOST: ${{ secrets.HOST }}
+       REMOTE_USER: ${{ secrets.USERNAME }}
+       TARGET: ${{ secrets.TARGET_DIR }}  
  
     - name: Executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
@@ -35,9 +35,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd ~/YOUR/TARGET/DIR
-            yarn/npm install
-            yarn/npm build
-            yarn/npm i serve
-            serve -p 3000 build/     
+            cd ./webapp  
     
