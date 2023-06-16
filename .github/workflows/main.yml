@@ -27,8 +27,8 @@ jobs:
        REMOTE_USER: ${{ secrets.USERNAME }}
       with:
        local-path: |
-            target/app.jar
-            target/dockerFile  # 假设 dockerFile 与 app.jar 在相同目录下
+            target/gameService-0.0.1-SNAPSHOT.jar
+            ./Dockerfile  # 假设 dockerFile 与 app.jar 在相同目录下
        remote-path: /webapp/
 
     - name: Executing remote ssh commands using ssh key
