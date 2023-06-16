@@ -1,0 +1,15 @@
+version: "3"
+services:
+  scm:
+    image: game:latest
+    container_name: game
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./game/logs/:/game/logs/
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+     TZ: Asia/Taipei  
+    
+      
