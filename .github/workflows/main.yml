@@ -42,6 +42,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /webapp 
-            docker build -t gameDemo .
-            docker run -d -p 8000:8080 gameDemo
+            docker build -t gamedemo .
+            docker run -d -p 8000:8080 gamedemo
     
