@@ -19,17 +19,19 @@ jobs:
     - name: Build with Maven
       run: mvn  package
       
+    - name: Move JAR and Dockerfile to workspace
+      run: |
+          mkdir -p $GITHUB_WORKSPACE/workspace
+          mv target/gameService-0.0.1-SNAPSHOT.jar $GITHUB_WORKSPACE/workspace/gameService-0.0.1-SNAPSHOT.jar
+          mv Dockerfile $GITHUB_WORKSPACE/workspace/Dockerfile  
+      
     - name: Deploy to Server 1
       uses: easingthemes/ssh-deploy@main
       env:
        SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
        REMOTE_HOST: ${{ secrets.HOST }}
        REMOTE_USER: ${{ secrets.USERNAME }}
-      with:
-       local-path: |
-            target/gameService-0.0.1-SNAPSHOT.jar
-            ./Dockerfile  # 假设 dockerFile 与 app.jar 在相同目录下
-       remote-path: /webapp/
+       TARGET: ${{ secrets.TARGET_DIR }}
 
     - name: Executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
