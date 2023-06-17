@@ -42,7 +42,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /webapp 
+            cd /webApp 
             docker rmi gamedemo
             docker build -t gamedemo .
             docker run -d -p 8000:8080 gamedemo
