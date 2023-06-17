@@ -43,7 +43,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /webApp 
-            docker rmi gamedemo
-            docker build -t gamedemo .
-            docker run -d -p 8000:8080 gamedemo
+            sudo docker rmi gamedemo
+            sudo docker build -t gamedemo .
+            sudo docker run -d -p 8000:8080 gamedemo
     
