@@ -33,6 +33,7 @@ jobs:
        REMOTE_USER: ${{ secrets.USERNAME }}
        TARGET: ${{ secrets.TARGET_DIR }}
 
+
     - name: Executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
       with:
@@ -41,7 +42,8 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd ./webapp 
-            docker build -t gameDemo .
-            docker run -d -p 8000:8080 gameDemo
+            cd /webApp 
+            sudo docker rmi gamedemo
+            sudo docker build -t gamedemo .
+            sudo docker run -d -p 8000:8080 gamedemo
     
