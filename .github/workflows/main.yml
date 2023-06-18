@@ -45,5 +45,5 @@ jobs:
             cd /webApp 
             sudo docker rmi gamedemo
             sudo docker build -t gamedemo .
-            sudo docker run -d -p 8000:8080 gamedemo
+            sudo docker run -d -p 443:443 gamedemo
     
