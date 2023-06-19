@@ -5,14 +5,15 @@ on:
     - opened
     - synchronize
 
-#具體要執行步驟
 jobs:
   ci-job:
-   #什麼OS下運行
    runs-on: ubuntu-latest
    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Run Actions on PR Changes
-      run: |
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        java-version: '8'  
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn  package
