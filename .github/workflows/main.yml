@@ -44,6 +44,8 @@ jobs:
           script: |
             cd /webApp 
             sudo docker rmi gamedemo
+            sudo docker stop game
+            sudo docker rm game
             sudo docker build -t gamedemo .
-            sudo docker run -d -p 8080:8080 gamedemo
+            sudo docker run --name game -d -p 8080:8080 gamedemo
     
