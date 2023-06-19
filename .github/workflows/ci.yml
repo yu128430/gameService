@@ -1,0 +1,18 @@
+name: Pull Request Workflow
+on:
+ pull_request:
+  types:
+    - opened
+    - synchronize
+
+#具體要執行步驟
+jobs:
+  ci-job:
+   #什麼OS下運行
+   runs-on: ubuntu-latest
+   steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run Actions on PR Changes
+      run: |
